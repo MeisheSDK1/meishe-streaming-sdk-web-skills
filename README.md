@@ -32,7 +32,7 @@ Live streaming · video creation tools · social web apps · online education ·
 3. Add the SDK dependency and configure capture, editing, and output.
 4. Validate performance across target browsers and devices.
 
-> Dependency coordinates, sample code, and API references: see the repository docs.
+> Dependency coordinates, sample code, and SDK references: see the repository docs.
 
 ## MeisheSDK Demo Download:
 
