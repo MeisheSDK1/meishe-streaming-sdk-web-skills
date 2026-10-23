@@ -1,0 +1,5 @@
+interface:
+  display_name: "Meishe Streaming SDK Web"
+  short_description: "Integrate and troubleshoot Meishe Streaming SDK Web"
+  brand_color: "#6875ED"
+  default_prompt: "Use $meishe-streaming-sdk-web to answer, review, or troubleshoot read-only, and run prerequisite gates and explicit approvals only when implementing a Meishe Streaming SDK Web integration."

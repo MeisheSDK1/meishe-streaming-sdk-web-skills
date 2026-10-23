@@ -1,0 +1,169 @@
+{
+  "schemaVersion": 4,
+  "sdkVersion": "3.16.0",
+  "aliases": {
+    "sdk": "integration-core",
+    "core": "integration-core",
+    "loading": "integration-core",
+    "lifecycle": "engine-lifecycle",
+    "authorization": "engine-lifecycle",
+    "media": "media-fs-and-weblocal",
+    "weblocal": "media-fs-and-weblocal",
+    "m3u8": "media-fs-and-weblocal",
+    "transcoding": "media-fs-and-weblocal",
+    "timeline": "timeline-track-clip",
+    "tracks": "timeline-track-clip",
+    "clips": "timeline-track-clip",
+    "monitor": "monitor-playback-coordinate",
+    "playback": "monitor-playback-coordinate",
+    "livewindow": "monitor-playback-coordinate",
+    "video": "video-editing",
+    "audio": "audio-editing",
+    "effects": "effects-transitions",
+    "transitions": "effects-transitions",
+    "keyframes": "keyframes-and-animation",
+    "templates": "templates-and-nested-timelines",
+    "masks": "advanced-effects",
+    "packages": "asset-package-management",
+    "metadata": "metadata-thumbnail-waveform",
+    "xml": "project-xml-and-persistence",
+    "persistence": "project-xml-and-persistence"
+  },
+  "domains": [
+    {
+      "id": "integration-core",
+      "reference": "integration-core.md",
+      "description": "SDK loading, authorization, shared values, and core integration.",
+      "requiredSymbols": [
+        "Module",
+        "FS"
+      ]
+    },
+    {
+      "id": "engine-lifecycle",
+      "reference": "engine-lifecycle.md",
+      "description": "Streaming context lifecycle, initialization, state, and cleanup.",
+      "requiredSymbols": [
+        "NvsStreamingContext.initInternalResources",
+        "NvsStreamingContext.streamingEngineReadyForTimelineModification"
+      ]
+    },
+    {
+      "id": "media-fs-and-weblocal",
+      "reference": "media-fs-and-weblocal.md",
+      "description": "Virtual FS, local/network media, fonts, and WebLocal resources.",
+      "requiredSymbols": [
+        "NvsStreamingContext.registerLocalFile"
+      ]
+    },
+    {
+      "id": "timeline-track-clip",
+      "reference": "timeline-track-clip.md",
+      "description": "Timeline, track, and clip object structure and editing operations.",
+      "requiredSymbols": [
+        "NvsTimeline",
+        "NvsTimeline.getAudioTrackByIndex"
+      ]
+    },
+    {
+      "id": "monitor-playback-coordinate",
+      "reference": "monitor-playback-coordinate.md",
+      "description": "LiveWindow, playback, seek, canvas, and coordinate conversion.",
+      "requiredSymbols": [
+        "NvsStreamingContext.createLiveWindow"
+      ]
+    },
+    {
+      "id": "video-editing",
+      "reference": "video-editing.md",
+      "description": "Video/image clips, transforms, speed, blending, and watermarks.",
+      "requiredSymbols": [
+        "NvsVideoClip",
+        "NvsTimeline.getVideoTrackByIndex"
+      ]
+    },
+    {
+      "id": "audio-editing",
+      "reference": "audio-editing.md",
+      "description": "Audio tracks, clips, volume, fades, channels, and audio effects.",
+      "requiredSymbols": [
+        "NvsAudioFileWriter",
+        "NvsAudioFileWriter.close",
+        "NvsTimeline.getAudioTrackByIndex"
+      ]
+    },
+    {
+      "id": "captions",
+      "reference": "captions.md",
+      "description": "Timeline/track/clip captions and text styling.",
+      "requiredSymbols": [
+        "NvsTimeline.addCaption"
+      ]
+    },
+    {
+      "id": "stickers",
+      "reference": "stickers.md",
+      "description": "Timeline/track/clip animated stickers and custom stickers.",
+      "requiredSymbols": [
+        "NvsTimeline.addAnimatedSticker"
+      ]
+    },
+    {
+      "id": "effects-transitions",
+      "reference": "effects-transitions.md",
+      "description": "Video/audio effects, filters, color, and transitions.",
+      "requiredSymbols": [
+        "NvsFx.setFloatVal",
+        "NvsTimeline.addBuiltinTimelineVideoFx"
+      ]
+    },
+    {
+      "id": "keyframes-and-animation",
+      "reference": "keyframes-and-animation.md",
+      "description": "Keyframes, curves, motion, and animation timing.",
+      "requiredSymbols": [
+        "NvsFx.setParamKeyframeAtTime"
+      ]
+    },
+    {
+      "id": "templates-and-nested-timelines",
+      "reference": "templates-and-nested-timelines.md",
+      "description": "Templates, template footage, and nested timelines.",
+      "requiredSymbols": [
+        "NvsStreamingContext.createTemplateTimeline"
+      ]
+    },
+    {
+      "id": "advanced-effects",
+      "reference": "advanced-effects.md",
+      "description": "Particles, AR, masks, keying, human detection, and advanced effects.",
+      "requiredSymbols": [
+        "NvsFx.getARSceneManipulate"
+      ]
+    },
+    {
+      "id": "asset-package-management",
+      "reference": "asset-package-management.md",
+      "description": "Asset package install, status, upgrade, authorization, and removal.",
+      "requiredSymbols": [
+        "NvsAssetPackageManager.installAssetPackage"
+      ]
+    },
+    {
+      "id": "metadata-thumbnail-waveform",
+      "reference": "metadata-thumbnail-waveform.md",
+      "description": "AV metadata, thumbnails, icons, waveforms, codecs, and frame grabbing.",
+      "requiredSymbols": [
+        "NvsStreamingContext.getAVFileInfo"
+      ]
+    },
+    {
+      "id": "project-xml-and-persistence",
+      "reference": "project-xml-and-persistence.md",
+      "description": "Project/XML persistence and project/template package generation.",
+      "requiredSymbols": [
+        "NvsStreamingContext.loadProject"
+      ]
+    }
+  ]
+}

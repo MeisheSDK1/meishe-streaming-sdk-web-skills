@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "environment": "test-only",
+  "productionDefault": false,
+  "resources": [
+    {
+      "id": "default-caption-style",
+      "url": "https://qasset.meishesdk.com/material/captionstyle/E30D10CF-6693-4BDD-BE66-418F86BB1578.5.captionstyle",
+      "purpose": "Default validation-editor caption style; never a production default",
+      "source": "User-approved Meishe qasset URL",
+      "license": "No separate SDK license file supplied; production usage rights remain project-owned",
+      "mimeType": "application/octet-stream",
+      "requireCors": true
+    },
+    {
+      "id": "default-animated-sticker",
+      "url": "https://qasset.meishesdk.com/material/pu/animatedsticker/A1509C3D-7F5C-43CB-96EE-639ED7616BB7/A1509C3D-7F5C-43CB-96EE-639ED7616BB7.1.animatedsticker",
+      "purpose": "Default validation-editor animated sticker; never a production default",
+      "source": "User-approved Meishe qasset URL",
+      "license": "No separate SDK license file supplied; production usage rights remain project-owned",
+      "mimeType": "application/octet-stream",
+      "requireCors": true
+    }
+  ]
+}

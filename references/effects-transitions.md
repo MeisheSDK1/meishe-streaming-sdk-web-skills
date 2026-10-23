@@ -1,0 +1,33 @@
+# Effects, filters, and transitions
+
+Use the Effects group in [sample-index.md](sample-index.md) for individual effects, validation-editor lanes, atomic adjustment commands, track effects, transitions, parameter keyframes, manual adjustment, LUT, background fill, and automatic tone. Select only the sample matching the requested owner and product kind; do not substitute guessed parameter names.
+
+Manual adjustment is a stack of the verified built-ins `Tint`, `BasicImageAdjust`, `Sharpen`, `Definition`, `Denoise`, and `Vignette`. For a video clip, create them with `appendRawBuiltinFx()` so they operate on the raw input. For a timeline range, create separate `NvsTimelineVideoFx` objects with `addBuiltinTimelineVideoFx()`. Do not reuse the video Raw FX sample for timeline adjustment or the timeline sample for clip adjustment.
+
+In an editor, represent those six timeline effects as one logical adjustment item with one stable ID, virtual-lane index, creation order, range, and parameter snapshot. All stack members must share the same in/out points. Trim, Split, delete, undo/redo restoration, and Reset all are atomic across the stack; if any member fails, restore or remove every affected member. Reset all is one inspector command and one history entry, not six user-visible edits.
+
+Only use the exact parameter names and ranges in [adjustment-schema.ts](../assets/samples/effects/adjustment-schema.ts). In particular, `Sharpen.Amount` is `[0, 5]`; `Definition.Intensity`, `Denoise.Intensity`, and `Vignette.Degree` are `[0, 1]`; the basic/tint float parameters are `[-1, 1]`; and `Vignette.Color` is an SDK color converted from `#AARRGGBB`.
+
+Effects can belong to a timeline, video track, video clip, or audio clip. Use the class matching the requested scope. Built-in APIs take SDK-defined names; packaged APIs take installed package IDs. Never substitute a display name, translated label, or file name for either identifier.
+
+Keep product taxonomy separate from SDK representation. `filter` and `effect` are distinct catalog and virtual-lane kinds even when both use `NvsTimelineVideoFx` and `NvsAssetPackageTypeEnum.VideoFx`. `builtin` and `package` describe the resource source, not the product kind. Persist kind, source, SDK name or package ID, display name, virtual-lane index, and in/out points; persist intensity capability and value only when supported. Keep built-in tools such as Crop or verified masks in an explicit built-in catalog when the product requests that taxonomy.
+
+Clip Raw FX and normal clip FX have different removal APIs. Remove an effect created with `appendRawBuiltinFx()` or `appendRawPackagedFx()` through `NvsVideoClip.removeRawFx()`; remove a normal clip effect through `removeFx()`. Preserve that distinction in rollback and teardown paths as well as the successful path.
+
+Typical verified entry points are `addBuiltinTimelineVideoFx()`, `addPackagedTimelineVideoFx()`, `addBuiltinTrackVideoFx()`, `addPackagedTrackVideoFx()`, `appendBuiltinFx()`, `appendPackagedFx()`, and `NvsAudioClip.appendFx()`. Query the exact owner/signature before implementation.
+
+For transitions, the source clip index identifies the boundary between that clip and the next clip on the same video track. Require both clips to exist and require `sourceClip.getOutPoint() === nextClip.getInPoint()` before calling the SDK; video transitions cannot cross a Timeline gap. Use `setBuiltinTransition()` for verified built-in names or `setPackagedTransition()` after the package is `Ready`. Then inspect `getTransitionBySourceClipIndex()`, read the actual duration, and for a packaged transition verify `getVideoTransitionPackageId()`. Delete a transition with `setBuiltinTransition(sourceClipIndex, '')` and verify that the boundary query returns no transition.
+
+In a validation editor, target the highest-index user video track and exclude any hidden system base track. If several gapless boundaries qualify, select the one nearest the retained SDK playhead and use the earlier boundary to break a distance tie. Rebuild visible transition records from `getTransitionBySourceClipIndex()` after clip delete, Split, Trim, undo, redo, or project restoration so stale markers and selections do not survive. `NvsVideoClip` may describe video or image media; when a product requires two actual video assets, enforce that product rule from application-owned media metadata before setting the transition.
+
+`NvsFx` parameters are typed. Use the matching setter (`setStringVal`, `setBooleanVal`, `setFloatVal`, `setMenuVal`, `setIntVal`, `setColorVal`, or keyframe variants) only with parameter names/ranges supported by the selected effect description/documentation. `setFilterIntensity()` is available where the effect supports filter intensity.
+
+For a validation editor, keep filter, effect, and adjustment virtual lanes in separate namespaces. Check only the highest lane of the matching kind: reuse it when its `[in, out)` ranges do not conflict, otherwise append one lane; allow adjacent boundaries to share a lane and never search lower lanes for free space. Trim timed effects with `changeInPoint()` or `changeOutPoint()`, enforce the owner duration, a one-frame minimum, and same-kind/same-lane neighbors in both gesture preview and the mutation API, then store the actual SDK-returned range. Apply an adjustment Trim to every stack member and verify the stack remains synchronized.
+
+Call `setFilterIntensity()` or `getFilterIntensity()` only after the selected effect description, package metadata, or target documentation explicitly establishes intensity support. Treat catalog labels such as filter/effect as product taxonomy, not capability evidence.
+
+For every visible add, delete, Trim, move, undo, redo, or completed parameter gesture, call `getTimelineCurrentPosition(timeline)` once at transaction start and retain that return value locally. Intermediate gesture previews may update parameters without creating separate transactions. After the completed mutation and duration synchronization, clamp the retained value and call `seekTimeline()` so the connected LiveWindow renders the change. “Retain” never means maintaining a second application-owned playhead.
+
+Use [keyframe-inspection.ts](../assets/samples/effects/keyframe-inspection.ts) to enumerate ordinary effect-parameter keyframes. Compound-caption parameters are a special case: select each time with `setCurrentKeyFrameTime()` and then read the parameter because the 3.16.0 declaration does not expose the ordinary keyframe-list API for that owner.
+
+Validate effect object, owner/index, in/out interval, parameter round-trip, transition boundary, rendered seek, and removal. Treat an unknown effect name/schema as runtime-critical `unknown`.

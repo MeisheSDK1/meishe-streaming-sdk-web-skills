@@ -1,0 +1,60 @@
+{
+  "schemaVersion": 1,
+  "recipes": [
+    {
+      "id": "simple-weblocal-preview",
+      "description": "React/Vite local video import, Timeline placement, LiveWindow seek/playback, and owned cleanup.",
+      "features": [
+        "integration-core",
+        "engine-lifecycle",
+        "media-fs-and-weblocal",
+        "timeline-track-clip",
+        "monitor-playback-coordinate"
+      ],
+      "requiredSymbols": [
+        "Module",
+        "FS",
+        "nvsGetStreamingContextInstance",
+        "nvsResumeAudioContextWithPromise",
+        "NvsRational.constructor",
+        "NvsVideoResolution.constructor",
+        "NvsAudioResolution.constructor",
+        "NvsCreateTimelineFlagEnum.DontAddDefaultVideoTransition",
+        "NvsCreateTimelineFlagEnum.ForceAudioSampleFormatUsed",
+        "NvsCreateTimelineFlagEnum.RecordingUserOperation",
+        "NvsCreateTimelineFlagEnum.SyncAudioVideoTrasitionInVideoTrack",
+        "NvsLiveWindowFillModeEnum.PreserveAspectFit",
+        "NvsVideoPreviewSizeModeEnum.LiveWindowSize",
+        "NvsStreamingEngineStateEnum.StreamingEngineStatePlayback",
+        "NvsStreamingContext.getSdkVersion",
+        "NvsStreamingContext.initInternalResources",
+        "NvsStreamingContext.verifySdkLicenseFile",
+        "NvsStreamingContext.onWebRequestAuthFinish",
+        "NvsStreamingContext.createTimeline",
+        "NvsStreamingContext.createLiveWindow",
+        "NvsStreamingContext.connectTimelineWithLiveWindow",
+        "NvsStreamingContext.streamingEngineReadyForTimelineModification",
+        "NvsStreamingContext.getAVFileInfo",
+        "NvsStreamingContext.registerLocalFile",
+        "NvsStreamingContext.unregisterLocalFile",
+        "NvsStreamingContext.seekTimeline",
+        "NvsStreamingContext.playbackTimeline",
+        "NvsStreamingContext.getTimelineCurrentPosition",
+        "NvsStreamingContext.getStreamingEngineState",
+        "NvsStreamingContext.stop",
+        "NvsStreamingContext.disconnectLiveWindow",
+        "NvsStreamingContext.removeLiveWindow",
+        "NvsStreamingContext.removeTimeline",
+        "NvsStreamingContext.onPlaybackTimelinePosition",
+        "NvsStreamingContext.onPlaybackStopped",
+        "NvsStreamingContext.onPlaybackEOF",
+        "NvsTimeline.appendVideoTrack",
+        "NvsTimeline.removeVideoTrack",
+        "NvsTimeline.getDuration",
+        "NvsTrack.getIndex",
+        "NvsVideoTrack.addClip",
+        "NvsLiveWindow.setFillMode"
+      ]
+    }
+  ]
+}

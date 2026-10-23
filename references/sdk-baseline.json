@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 2,
+  "skillVersion": "1.0.0",
+  "sdkVersion": "3.16.0",
+  "apiFile": "references/NvStreamingSdk.js",
+  "apiFileSha256": "8B721A610761AEE0641172704FEAA782A8B405B28E9FA235D646994118D15767",
+  "typeFile": "assets/types/sdk.d.ts",
+  "typeFileSha256": "56DBFC5C8675535390B63769D554F7321EBF18527EEB3A8D8DF3F669A93ADF5F",
+  "generatorVersion": 3,
+  "runtimeDependencies": {
+    "meishewasmloader": {
+      "package": "meishewasmloader",
+      "versionPolicy": "preserve-declared-install-if-absent",
+      "bundled": false,
+      "networkApprovalRequired": true
+    }
+  },
+  "symbolCounts": {
+    "callback": 13,
+    "class": 76,
+    "constant": 62,
+    "constructor": 16,
+    "enum": 30,
+    "enumMember": 182,
+    "getter": 2,
+    "globalFunction": 6,
+    "globalVariable": 2,
+    "method": 862,
+    "property": 191,
+    "setter": 2
+  },
+  "sourceNotes": [
+    "NvStreamingSdk.js is a query-only reference and must never be copied into customer projects.",
+    "Documentation may describe 3.15.1; 3.16.0 API signatures take precedence."
+  ]
+}
